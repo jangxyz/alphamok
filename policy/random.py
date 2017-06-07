@@ -14,9 +14,9 @@ def choose_action(env, **data):
 #def before_episode(env, episode_num, **data):
 #    return data
 
-#def after_action(observation, reward, done, info, **data):
+#def after_action(env, observation, reward, done, info, **data):
 #    pass
 
-#def after_episode(observation, reward, done, info, **data):
+#def after_episode(env, observation, reward, done, info, **data):
 #    pass
 

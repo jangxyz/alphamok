@@ -39,14 +39,17 @@ def play_episode(env, policy, episode,
         # after action
         episode_history.append(str(env.state))
         if 'after_action' in dir(policy):
-            policy.after_action(observation, reward, done, info, **data) 
+            policy.after_action(env, observation, reward, done, info, **data) 
 
         # render
         if render_step:
             env.render()
 
         if done:
-            print("Game is Over")
+            print("Game is Over (reward: {})".format(reward))
+            if reward > 0: print("You Won!!!")
+            if reward < 0: print("You Lost!!!")
+
             break
 
     # after episode
@@ -60,7 +63,7 @@ def play_episode(env, policy, episode,
             print(board_str)
 
     if 'after_episode' in dir(policy):
-        _result = policy.after_episode(observation, reward, done, info, **data) 
+        _result = policy.after_episode(env, observation, reward, done, info, **data) 
         if _result is not None:
             data = _result
 

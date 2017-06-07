@@ -94,12 +94,15 @@ If the policy module contains the corresponding functions, it will be called ith
 
     NOTE if the callback has any return value that is not `None`, it will replace the `data` object.
 
-* `after_action(observation, reward, done, info, **data)`
+* `after_action(env, observation, reward, done, info, **data)`
 
     Called after each action is applied to the environment.
     The response of the environment `(observation, reward, done, info)` is passed along with `**data`.
 
-* `after_episode(observation, reward, done, info, **data)`
+    You can use this callback to save any 'previous state' variables for the policy. See `policy/beginner.py` for an example.
+
+
+* `after_episode(env, observation, reward, done, info, **data)`
 
     Called after each action is applied to the environment.
     The response of the environment `(observation, reward, done, info)` is passed along with `**data`.
@@ -109,5 +112,4 @@ If the policy module contains the corresponding functions, it will be called ith
 * `complete(env, **data)`
 
     Called after the whole iteration is done.
-
 
