@@ -46,9 +46,9 @@ To add a new policy, add a python file under `policy/` and pass the name to `--p
 
         python run.py --size=9 --episodes=1 --policy=random
 
-By default there are two policies provided, `random` and `beginner` from the gym-gomoku package.
+By default there are two policies provided, [random](https://github.com/jangxyz/alphamok/blob/master/policy/random.py) and [beginner](https://github.com/jangxyz/alphamok/blob/master/policy/beginner.py) from the gym-gomoku package.
 
-To build a policy, see [#policy-specification] below.
+To build a policy, see [Policy Specification](#user-content-policy-specification) below.
 
 
 ### --episodes: number of episodes to run
@@ -111,7 +111,7 @@ If the policy module contains the corresponding functions, it will be called ith
     Called after the whole iteration is done.
 
 
-For instance, the simplest implementation `policy/random.py` looks like this:
+For instance, the simplest implementation [policy/random.py](https://github.com/jangxyz/alphamok/blob/master/policy/random.py) looks like this:
 
 ```python
 def choose_action(env, **data):
@@ -135,6 +135,6 @@ def choose_action(env, **data):
 #    pass
 ```
 
-Checkout `policy/beginner.py` for another example.
+Checkout [policy/beginner.py](https://github.com/jangxyz/alphamok/blob/master/policy/beginner.py) for another example.
 
 
