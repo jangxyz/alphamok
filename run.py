@@ -84,7 +84,7 @@ def main(size, policy, episodes, render_steps, render_win_steps, render_lose_ste
 
     # load policy
     policy_name = 'policy.{}'.format(policy)
-    policy = __import__(policy_name, globals(), locals(), ['choose_action'], -1)
+    policy = __import__(policy_name, globals(), locals(), ['choose_action'], 0)
 
     # init
     policy_has_init = 'init' in dir(policy)
