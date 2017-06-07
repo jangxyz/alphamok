@@ -51,6 +51,8 @@ To add a new policy, add a python file under `policy/` and pass the name to `--p
 
         python run.py --size=9 --episodes=1 --policy=random
 
+By default there are two policies provided, `random` and `beginner` from the gym-gomoku package.
+
 To build a policy, see [#policy-specification] below.
 
 
