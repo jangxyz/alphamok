@@ -4,18 +4,14 @@
 Play with default options
 
 
-```
-
+```bash
 $ python run.py
-
 ```
 
 
 ## Options
 
-
-```
-
+```bash
 $ python run.py --help
 Usage: run.py [OPTIONS]
 
@@ -35,7 +31,6 @@ Options:
   --render-episode / --no-render-episode
                                   render on end of episode [False]
   --help                          Show this message and exit.
-
 ```
 
 ### --size: set board size
@@ -114,4 +109,32 @@ If the policy module contains the corresponding functions, it will be called ith
 * `complete(env, **data)`
 
     Called after the whole iteration is done.
+
+
+For instance, the simplest implementation `policy/random.py` looks like this:
+
+```python
+def choose_action(env, **data):
+    # sample without replacement
+    action = env.action_space.sample()
+    return action
+
+#def init(env):
+#    return {}
+
+#def complete(env, **data):
+#    pass
+
+#def before_episode(env, episode_num, **data):
+#    return data
+
+#def after_action(env, observation, reward, done, info, **data):
+#    pass
+
+#def after_episode(env, observation, reward, done, info, **data):
+#    pass
+```
+
+Checkout `policy/beginner.py` for another example.
+
 
