@@ -10,14 +10,15 @@ $ python run.py
 
 ## Contents
 
-* Options
-  * --size: set board size
-  * --policy: set agent action policy
-  * --env-policy: set environment policy
-  * --episodes: number of episodes to run
-  * Render options
-* Policy Specification
-* Examples
+* [#Options](#user-content-options)
+  * [--size: set board size](#user-content---size-set-board-size)
+  * [#--policy: set agent action policy](#user-content---policy-set-agent-action-policy)
+  * [#--env-policy: set environment policy](#user-content---env-policy-set-environment-policy)
+  * [#--episodes: number of episodes to run](#user-content---episodes-number-of-episodes-to-run)
+  * [#Render options](#user-content-render-options)
+* [#Policy Specification](#user-content-policy-specification)
+* [#Examples](#user-content-examples)
+
 
 
 ## Options
@@ -60,7 +61,7 @@ To add a new policy, add a python file under `policy/` and pass the name to `--p
 
 By default there are two policies provided, [random](https://github.com/jangxyz/alphamok/blob/master/policy/random.py) and [beginner](https://github.com/jangxyz/alphamok/blob/master/policy/beginner.py) from the gym-gomoku package.
 
-To build a policy, see [Policy Specification](#user-content-policy-specification) below.
+To build a policy, see [#Policy Specification](#user-content-policy-specification) below.
 
 
 ### --env-policy: set environment policy
