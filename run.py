@@ -68,9 +68,10 @@ def play_episode(env, policy, episode,
             data = _result
 
 
-def load_env(board_size, env_policy='beginner'):
+def load_env(board_size, env_policy_name='beginner'):
     gym_name = 'Gomoku{size}x{size}-v0'.format(size=board_size) # Gomoku19x19-v0
 
+    # load env with board_size
     if board_size not in [9, 19]:
         # register new env
         gym.envs.registration.register(
@@ -85,21 +86,31 @@ def load_env(board_size, env_policy='beginner'):
         )
 
     env = gym.make(gym_name)
+
+    # reload env with policy
+    if env_policy_name != 'beginner':
+        env.opponent = env_policy_name
+        env_module_name = 'env_policy.{}'.format(env_policy_name)
+        env_policy = __import__(env_module_name, globals(), locals(), ['policy'], 0)
+        env.opponent_policy = env_policy.policy
+
     return env
 
 
 @click.command()
 @click.option('--size', default=19, help='size of board [19]')
 @click.option('--policy', default='random', help='name of policy [random]')
+@click.option('--env-policy', default='beginner', help='name of env policy [beginner]')
 @click.option('--episodes', default=1, help='number of episodes to run [1]')
 @click.option('--render-steps/--no-render-steps', default=True, help='render on each step [True]')
 @click.option('--render-win-steps/--no-render-win-steps', default=False, help='render all steps episodes won [False]')
 @click.option('--render-lose-steps/--no-render-lose-steps', default=False, help='render all steps episodes lost [False]')
 @click.option('--render-tie-steps/--no-render-tie-steps', default=False, help='render all steps episodes lost [False]')
 @click.option('--render-episode/--no-render-episode', default=False, help='render on end of episode [False]')
-def main(size, policy, episodes, render_steps, render_win_steps, render_lose_steps, render_tie_steps, render_episode):
+def main(size, policy, episodes, env_policy, 
+         render_steps, render_win_steps, render_lose_steps, render_tie_steps, render_episode):
     # load env
-    env = load_env(size)
+    env = load_env(size, env_policy)
 
     # load policy
     policy_name = 'policy.{}'.format(policy)
