@@ -10,14 +10,14 @@ $ python run.py
 
 ## Contents
 
-* [#Options](#user-content-options)
+* [Options](#user-content-options)
   * [--size: set board size](#user-content---size-set-board-size)
-  * [#--policy: set agent action policy](#user-content---policy-set-agent-action-policy)
-  * [#--env-policy: set environment policy](#user-content---env-policy-set-environment-policy)
-  * [#--episodes: number of episodes to run](#user-content---episodes-number-of-episodes-to-run)
-  * [#Render options](#user-content-render-options)
-* [#Policy Specification](#user-content-policy-specification)
-* [#Examples](#user-content-examples)
+  * [--policy: set agent action policy](#user-content---policy-set-agent-action-policy)
+  * [--env-policy: set environment policy](#user-content---env-policy-set-environment-policy)
+  * [--episodes: number of episodes to run](#user-content---episodes-number-of-episodes-to-run)
+  * [Render options](#user-content-render-options)
+* [Policy Specification](#user-content-policy-specification)
+* [Examples](#user-content-examples)
 
 
 
