@@ -1,5 +1,5 @@
 
-# Omok Testbed
+# Gym-omok Testbed
 
 Play with default options
 
@@ -7,6 +7,17 @@ Play with default options
 ```bash
 $ python run.py
 ```
+
+## Contents
+
+* Options
+  * --size: set board size
+  * --policy: set agent action policy
+  * --env-policy: set environment policy
+  * --episodes: number of episodes to run
+  * Render options
+* Policy Specification
+* Examples
 
 
 ## Options
@@ -19,6 +30,7 @@ Usage: run.py [OPTIONS]
 Options:
   --size INTEGER                  size of board [19]
   --policy TEXT                   name of policy [random]
+  --env-policy TEXT               name of env policy [beginner]
   --episodes INTEGER              number of episodes to run [1]
   --render-steps / --no-render-steps
                                   render on each step [True]
@@ -49,6 +61,19 @@ To add a new policy, add a python file under `policy/` and pass the name to `--p
 By default there are two policies provided, [random](https://github.com/jangxyz/alphamok/blob/master/policy/random.py) and [beginner](https://github.com/jangxyz/alphamok/blob/master/policy/beginner.py) from the gym-gomoku package.
 
 To build a policy, see [Policy Specification](#user-content-policy-specification) below.
+
+
+### --env-policy: set environment policy
+
+You can set custom environment policy. By default it behaves as [beginner](https://github.com/jangxyz/alphamok/blob/master/source/gym-gomoku/gym_gomoku/envs/util.py).
+
+For example you can run your agent with the `beginner` policy, and environment with `dull4` policy, which just blocks at 4-in-a-row and else random. This already lets the agent win!
+
+        python run.py --size=9 --env-policy=dull4 --policy=beginner
+
+Some pre-defined env-policies:
+- dull4: play at random position, except when it finds a 4-in-a-row situation.
+- dull3: play at random position, except when it finds a 3-in-a-row situation.
 
 
 ### --episodes: number of episodes to run
