@@ -15,6 +15,36 @@ def default_policy(env):
     return action
 
 
+
+def load_env(board_size, env_policy_name='beginner'):
+    gym_name = 'Gomoku{size}x{size}-custom-v0'.format(size=board_size) # Gomoku19x19-v0
+
+    # register new env
+    gym.envs.registration.register(
+        id=gym_name,
+        entry_point='gym_gomoku.envs:GomokuEnv',
+        kwargs={
+            'player_color': 'black',
+            #'opponent': 'beginner', # beginner opponent policy has defend and strike rules
+            'opponent': 'env_policy.{}'.format(env_policy_name), # user custom opponent policy
+            'board_size': board_size,
+        },
+        nondeterministic=True,
+    )
+
+    env = gym.make(gym_name)
+
+    ## reload env with policy
+    #if env_policy_name != 'beginner':
+    #    env.opponent = env_policy_name
+    #    env_module_name = 'env_policy.{}'.format(env_policy_name)
+    #    env_policy = __import__(env_module_name, globals(), locals(), ['policy'], 0)
+    #    env.opponent_policy = env_policy.policy
+
+    return env
+
+
+
 def play_episode(env, policy, episode, 
                  render_step, render_win_steps, render_lose_steps, render_tie_steps, render_episode, 
                  **data):
@@ -67,34 +97,6 @@ def play_episode(env, policy, episode,
         if _result is not None:
             data = _result
 
-
-def load_env(board_size, env_policy_name='beginner'):
-    gym_name = 'Gomoku{size}x{size}-v0'.format(size=board_size) # Gomoku19x19-v0
-
-    # load env with board_size
-    if board_size not in [9, 19]:
-        # register new env
-        gym.envs.registration.register(
-            id=gym_name,
-            entry_point='gym_gomoku.envs:GomokuEnv',
-            kwargs={
-                'player_color': 'black',
-                'opponent': 'beginner', # beginner opponent policy has defend and strike rules
-                'board_size': board_size,
-            },
-            nondeterministic=True,
-        )
-
-    env = gym.make(gym_name)
-
-    # reload env with policy
-    if env_policy_name != 'beginner':
-        env.opponent = env_policy_name
-        env_module_name = 'env_policy.{}'.format(env_policy_name)
-        env_policy = __import__(env_module_name, globals(), locals(), ['policy'], 0)
-        env.opponent_policy = env_policy.policy
-
-    return env
 
 
 @click.command()
