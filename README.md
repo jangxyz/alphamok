@@ -20,7 +20,6 @@ $ python run.py
 * [Examples](#user-content-examples)
 
 
-
 ## Options
 
 ```bash
@@ -57,7 +56,9 @@ By default the agent selects a random action from the action space.
 
 To add a new policy, add a python file under `policy/` and pass the name to `--policy` option.
 
-        python run.py --size=9 --episodes=1 --policy=random
+```bash
+$ python run.py --size=9 --episodes=1 --policy=random
+```
 
 By default there are two policies provided, [random](https://github.com/jangxyz/alphamok/blob/master/policy/random.py) and [beginner](https://github.com/jangxyz/alphamok/blob/master/policy/beginner.py) from the gym-gomoku package.
 
@@ -70,7 +71,9 @@ You can set custom environment policy. By default it behaves as [beginner](https
 
 For example you can run your agent with the `beginner` policy, and environment with `dull4` policy, which just blocks at 4-in-a-row and else random. This already lets the agent win!
 
-        python run.py --size=9 --env-policy=dull4 --policy=beginner
+```bash
+$ python run.py --size=9 --env-policy=dull4 --policy=beginner
+```
 
 Some pre-defined env-policies:
 - dull4: play at random position, except when it finds a 4-in-a-row situation.
@@ -81,7 +84,9 @@ Some pre-defined env-policies:
 
 To let the agent run, you can run episode multiple times.
 
-        python run.py --episodes=1000 --no-render-steps
+```bash
+$ python run.py --episodes=1000 --no-render-steps
+```
 
 
 ### Render options
@@ -163,4 +168,26 @@ def choose_action(env, **data):
 
 Checkout [policy/beginner.py](https://github.com/jangxyz/alphamok/blob/master/policy/beginner.py) for another example.
 
+
+## Examples
+
+
+```bash
+
+# default run
+$ python run.py
+
+# print help and exit
+$ python run.py --help
+
+# play with random policy
+$ python run.py --size=9 --episodes=1 --policy=random
+
+# play with beginner VS dull4 (agent usually wins)
+$ python run.py --size=9 --env-policy=dull4 --policy=beginner
+
+# run 1000 episodes without rendering any steps
+$ python run.py --episodes=1000 --no-render-steps
+
+```
 

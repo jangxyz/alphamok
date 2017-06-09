@@ -76,7 +76,7 @@ def play_episode(env, policy, episode,
             env.render()
 
         if done:
-            print("Game is Over (reward: {})".format(reward))
+            print("#{} Game is Over (reward: {})".format(episode, reward))
             if reward > 0: print("You Won!!!")
             if reward < 0: print("You Lost!!!")
 
