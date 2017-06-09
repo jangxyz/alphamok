@@ -68,6 +68,26 @@ def play_episode(env, policy, episode,
             data = _result
 
 
+def load_env(board_size, env_policy='beginner'):
+    gym_name = 'Gomoku{size}x{size}-v0'.format(size=board_size) # Gomoku19x19-v0
+
+    if board_size not in [9, 19]:
+        # register new env
+        gym.envs.registration.register(
+            id=gym_name,
+            entry_point='gym_gomoku.envs:GomokuEnv',
+            kwargs={
+                'player_color': 'black',
+                'opponent': 'beginner', # beginner opponent policy has defend and strike rules
+                'board_size': board_size,
+            },
+            nondeterministic=True,
+        )
+
+    env = gym.make(gym_name)
+    return env
+
+
 @click.command()
 @click.option('--size', default=19, help='size of board [19]')
 @click.option('--policy', default='random', help='name of policy [random]')
@@ -79,8 +99,7 @@ def play_episode(env, policy, episode,
 @click.option('--render-episode/--no-render-episode', default=False, help='render on end of episode [False]')
 def main(size, policy, episodes, render_steps, render_win_steps, render_lose_steps, render_tie_steps, render_episode):
     # load env
-    gym_name = 'Gomoku{size}x{size}-v0'.format(size=size) # Gomoku19x19-v0
-    env = gym.make(gym_name) # default 'beginner' level opponent policy
+    env = load_env(size)
 
     # load policy
     policy_name = 'policy.{}'.format(policy)
